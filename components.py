@@ -26,6 +26,15 @@ class LinearNetwork(nn.Module):
         out = self.linear(x)
         return out
 
+class ConvolutionNetwork(nn.Module):
+    def __init__(self, in_ch, out_ch, k=3, s=1, p=1):
+        super(ConvolutionNetwork, self).__init__()
+        self.conv = Conv2d(in_ch, out_ch, kernel_size=k, stride=s, padding=p)
+    
+    def forward(self, x):
+        out = self.conv(x)
+        return out    
+
 def getAccuracy(x_test, y_test, model):
     """Calculates the classification accuracy."""
     predicted = model(Variable(torch.from_numpy(x_test)))
